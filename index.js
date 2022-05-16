@@ -1,3 +1,7 @@
-const sequelize = require('./banco/db');
+const Pessoa = require('./models/Pessoa');
 
-console.log(sequelize);
+async function sincronizar(){
+  Pessoa.sync();
+}
+
+sincronizar();
