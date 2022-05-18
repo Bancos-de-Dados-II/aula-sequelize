@@ -1,15 +1,22 @@
-const Pessoa = require('./models/Pessoa');
+const express = require('express');
 
-(async () => {
-  // const pessoa = Pessoa.build({nome:"João da Silva"});
-  // await pessoa.save()
-  //   .then(console.log('Salvo com suceso'))
-  //   .catch(error =>{
-  //     console.log(error);
-  //   });
+const app = express();
+app.use(express.json());
 
-  Pessoa.findAll().then(p=>{
-    console.log(p);
-  });
+const pessoaController = require('./controllers/PessoaController');
 
-})();
+app.get('/pessoas/:id', pessoaController.getPessoa);
+
+app.post('/pessoas', (req, res) => {
+  res.send(req.body);
+});
+
+app.delete('/pessoas/:id', (req, res) => {
+  res.send(req.params.id);
+});
+
+app.put('/pessoas', (req, res) => {
+  res.send('hello world')
+});
+
+app.listen(3000);
